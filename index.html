@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Квазар · Космический маяк</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(ellipse at 30% 40%, #0b0d2e, #030514);
+            font-family: 'Segoe UI', 'Arial', system-ui, sans-serif;
+            color: #f0f6ff;
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 1rem 3rem;
+        }
+
+        .site-wrapper {
+            max-width: 1300px;
+            width: 100%;
+        }
+
+        /* ===== ХЕДЕР ===== */
+        .cosmic-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding: 2rem 1.5rem 1.8rem;
+            background: rgba(8, 12, 30, 0.7);
+            backdrop-filter: blur(6px);
+            border-radius: 80px 80px 40px 40px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7), 0 0 30px #4a2b9c4d;
+        }
+
+        .cosmic-header h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            text-shadow: 0 0 15px #f9f3b0, 0 0 40px #a57cff, 0 0 80px #3b0f6b;
+            background: linear-gradient(135deg, #ffe68f, #b3a6ff, #8ecae6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .subhead {
+            font-size: 1.3rem;
+            color: #c7d9ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .subhead img {
+            width: 42px;
+            height: 42px;
+            filter: drop-shadow(0 0 8px gold);
+            border-radius: 50%;
+            transition: transform 0.4s;
+        }
+        .subhead img:hover {
+            transform: rotate(30deg) scale(1.1);
+        }
+
+        /* ===== МЕНЮ ===== */
+        .menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem 1.5rem;
+            margin: 2.5rem 0 3rem;
+            padding: 1rem 0.5rem;
+        }
+
+        .menu-item {
+            background: rgba(20, 10, 40, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid #a384ff;
+            border-radius: 60px;
+            padding: 0.6rem 1.8rem 0.6rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #f9e38f;
+            box-shadow: 0 0 20px #4400ff66;
+            transition: 0.3s;
+        }
+
+        .menu-item:hover {
+            border-color: #fbd24d;
+            box-shadow: 0 0 35px #ffb347;
+            transform: scale(1.02) translateY(-3px);
+            background: rgba(30, 15, 50, 0.8);
+        }
+
+        .menu-item img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ffd966;
+            background: black;
+        }
+
+        /* ===== КАРТОЧКИ С ИНФОРМАЦИЕЙ ===== */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0 3.5rem;
+        }
+
+        .card {
+            background: rgba(0, 0, 15, 0.6);
+            backdrop-filter: blur(6px);
+            border-radius: 42px;
+            padding: 1.8rem 1.5rem 2rem;
+            border: 1px solid #8f6bc6;
+            box-shadow: inset 0 0 30px #12042b, 0 15px 30px #00000080;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            border-color: #e5b73b;
+            box-shadow: 0 0 50px #c394ff66, inset 0 0 30px #1a0438;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 180px;
+            border-radius: 32px;
+            object-fit: cover;
+            border: 3px solid #ffcf6e;
+            box-shadow: 0 10px 25px #000;
+            margin-bottom: 1.5rem;
+            background: #0d021c;
+            transition: transform 0.5s;
+        }
+
+        .card:hover .card-img {
+            transform: scale(0.98) brightness(1.1);
+        }
+
+        .card h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #ffdca3;
+            text-shadow: 0 0 10px orange;
+            letter-spacing: 1px;
+        }
+
+        .card p {
+            font-size: 1.1rem;
+            color: #dad2ff;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .mini-orrery {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 0.5rem;
+            padding: 0.6rem 0.2rem;
+            background: #00000033;
+            border-radius: 100px;
+        }
+        .mini-orrery span {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #fcd36c, #b85e00);
+            box-shadow: 0 0 15px currentColor;
+        }
+        .mini-orrery span:nth-child(2) { background: #b0b0ff; box-shadow:0 0 12px #6d8eff; }
+        .mini-orrery span:nth-child(3) { background: #6ba86b; box-shadow:0 0 10px #86f086; }
+        .mini-orrery span:nth-child(4) { background: #c27e5e; box-shadow:0 0 15px #d4570e; }
+        .mini-orrery span:nth-child(5) { background: #dbb87c; box-shadow:0 0 12px #ffb347; }
+
+        /* ===== АНИМАЦИЯ ВРАЩЕНИЯ (СОЛНЕЧНАЯ СИСТЕМА) ===== */
+        .animation-section {
+            margin: 2.5rem 0 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .toggle-btn {
+            background: linear-gradient(145deg, #422b6b, #1c1038);
+            border: 2px solid #ffb703;
+            color: #fff2cf;
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 0.9rem 3rem;
+            border-radius: 80px;
+            letter-spacing: 3px;
+            cursor: pointer;
+            box-shadow: 0 0 35px #f79d4d, 0 8px 0 #0d031f;
+            transition: 0.15s linear;
+            margin-bottom: 2.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .toggle-btn:active {
+            transform: translateY(6px);
+            box-shadow: 0 0 40px #ffe066, 0 2px 0 #120630;
+        }
+
+        .toggle-btn img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+        }
+
+        /* контейнер с планетами */
+        .solar-system {
+            position: relative;
+            width: 100%;
+            min-height: 420px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 0;
+        }
+
+        .orrery {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #fbb330, #e1780c, #5f2d02);
+            box-shadow: 0 0 100px #ffa726, 0 0 200px #f2b41677;
+            border: 3px solid #ffd966;
+        }
+
+        /* Солнце в центре */
+        .sun-center {
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            background: radial-gradient(circle at 30% 30%, #fff1b5, #fdaa18, #b35100);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 70px #ffd966;
+            z-index: 10;
+            border: 4px solid #ffe49e;
+        }
+
+        /* орбиты (кольца) */
+        .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px dashed rgba(255, 255, 200, 0.35);
+            border-radius: 50%;
+        }
+
+        .orbit1 { width: 160px; height: 160px; }  /* радиус 80px */
+        .orbit2 { width: 240px; height: 240px; }  /* радиус 120px */
+        .orbit3 { width: 320px; height: 320px; }  /* радиус 160px */
+
+        /* общий стиль для планет */
+        .planet {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            margin: -20px 0 0 -20px; /* центр планеты в точке (50%, 50%) */
+            transform-origin: 20px 20px; /* точка привязки — центр планеты */
+            transition: transform 0.05s linear;
+        }
+
+        .planet img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+            background: black;
+            display: block;
+        }
+
+        /* Радиусы орбит: Меркурий 80px, Венера 120px, Земля 160px */
+        /* Каждая планета изначально стоит на верхней точке своей орбиты (12 часов) */
+        .merc {
+            transform: translate(0, -80px); /* вверх на 80px */
+        }
+        .venus {
+            transform: translate(0, -120px);
+        }
+        .earth {
+            transform: translate(0, -160px);
+        }
+
+        /* Анимация вращения вокруг солнца (центр координат - центр оррери) */
+        @keyframes spin-merc {
+            0% { transform: translate(0, -80px) rotate(0deg); }
+            100% { transform: translate(0, -80px) rotate(360deg); }
+        }
+        @keyframes spin-venus {
+            0% { transform: translate(0, -120px) rotate(0deg); }
+            100% { transform: translate(0, -120px) rotate(360deg); }
+        }
+        @keyframes spin-earth {
+            0% { transform: translate(0, -160px) rotate(0deg); }
+            100% { transform: translate(0, -160px) rotate(360deg); }
+        }
+
+        /* ===== НАСТРОЙКА СКОРОСТИ ПО ЗАДАНИЮ ===== */
+        /* Меркурий - 3с, Венера - 5с, Земля - 8с (только орбитальное вращение) */
+        .spin .merc {
+            animation: spin-merc 3s infinite linear;
+            transform-origin: 20px 20px;
+        }
+        .spin .venus {
+            animation: spin-venus 5s infinite linear;
+            transform-origin: 20px 20px;
+        }
+        .spin .earth {
+            animation: spin-earth 8s infinite linear;
+            transform-origin: 20px 20px;
+        }
+
+        .credits {
+            margin-top: 2.2rem;
+            color: #9c94c7;
+            border-top: 1px dashed #62528a;
+            padding-top: 1.8rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="site-wrapper">
+    <!-- ЗАГОЛОВОК -->
+    <header class="cosmic-header">
+        <h1>КВАЗАР</h1>
+        <div class="subhead">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/NASA-HS201427a-HubbleUltraDeepField-20140603.jpg/320px-NASA-HS201427a-HubbleUltraDeepField-20140603.jpg" 
+                 alt="Hubble deep field" 
+                 onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2242%22%20height%3D%2242%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2245%22%20fill%3D%22%234c2b9c%22%2F%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2235%22%20r%3D%228%22%20fill%3D%22%23f5e56b%22%2F%3E%3C%2Fsvg%3E'">
+            <span>ядро галактики · свет через миллиарды лет</span>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Quasar_3C_273_%28cropped%29.jpg/320px-Quasar_3C_273_%28cropped%29.jpg" 
+                 alt="Квазар 3C 273" 
+                 onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2242%22%20height%3D%2242%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2245%22%20fill%3D%22%23932be2%22%2F%3E%3C%2Fsvg%3E'">
+        </div>
+    </header>
+
+    <!-- МЕНЮ (3 пункта, с картинками) -->
+    <nav class="menu">
+        <div class="menu-item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/NASA-HS201427a-HubbleUltraDeepField-20140603.jpg/320px-NASA-HS201427a-HubbleUltraDeepField-20140603.jpg" 
+                 alt="Hubble" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2248%22%20height%3D%2248%22%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2224%22%20r%3D%2222%22%20fill%3D%22%23344e9c%22%2F%3E%3C%2Fsvg%3E'">
+            <span>ДАЛЬНИЙ КОСМОС</span>
+        </div>
+        <div class="menu-item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Quasar_3C_273_%28cropped%29.jpg/320px-Quasar_3C_273_%28cropped%29.jpg" 
+                 alt="Quasar" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2248%22%20height%3D%2248%22%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2224%22%20r%3D%2222%22%20fill%3D%22%23e38b1e%22%2F%3E%3C%2Fsvg%3E'">
+            <span>КВАЗАРЫ</span>
+        </div>
+        <div class="menu-item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Sig05-026.jpg/320px-Sig05-026.jpg" 
+                 alt="black hole" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2248%22%20height%3D%2248%22%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2224%22%20r%3D%2222%22%20fill%3D%22%23000000%22%2F%3E%3C%2Fsvg%3E'">
+            <span>ЧЁРНЫЕ ДЫРЫ</span>
+        </div>
+    </nav>
+
+    <!-- 3 БЛОКА С ИНФОРМАЦИЕЙ + картинки -->
+    <section class="info-grid">
+        <!-- БЛОК 1 -->
+        <div class="card">
+            <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Quasar_3C_273_%28cropped%29.jpg/640px-Quasar_3C_273_%28cropped%29.jpg" 
+                 alt="Квазар 3C 273" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22300%22%20height%3D%22180%22%3E%3Crect%20width%3D%22300%22%20height%3D%22180%22%20fill%3D%22%23200f3a%22%2F%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%2290%22%20r%3D%2240%22%20fill%3D%22%23ffcc66%22%2F%3E%3C%2Fsvg%3E'">
+            <h3>Что такое квазар?</h3>
+            <p>Квазар — сверхмассивная чёрная дыра, поглощающая вещество и выбрасывающая колоссальные потоки энергии. Это самые яркие объекты во Вселенной, видные с расстояния в миллиарды световых лет.</p>
+            <div class="mini-orrery">
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
+        </div>
+        <!-- БЛОК 2 -->
+        <div class="card">
+            <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/NASA-HS201427a-HubbleUltraDeepField-20140603.jpg/640px-NASA-HS201427a-HubbleUltraDeepField-20140603.jpg" 
+                 alt="Hubble deep field" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22300%22%20height%3D%22180%22%3E%3Crect%20width%3D%22300%22%20height%3D%22180%22%20fill%3D%22%2300162b%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2215%22%20fill%3D%22%23f5f5b3%22%2F%3E%3C%2Fsvg%3E'">
+            <h3>Свет далёких миров</h3>
+            <p>Свет квазаров идёт к нам миллиарды лет. Мы видим их такими, какими они были вскоре после Большого взрыва — это окно в младенчество Вселенной.</p>
+            <div class="mini-orrery">
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
+        </div>
+        <!-- БЛОК 3 -->
+        <div class="card">
+            <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Sig05-026.jpg/640px-Sig05-026.jpg" 
+                 alt="Активное ядро" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22300%22%20height%3D%22180%22%3E%3Crect%20width%3D%22300%22%20height%3D%22180%22%20fill%3D%22%23300f4f%22%2F%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%2290%22%20r%3D%2230%22%20fill%3D%22%23ff9f2b%22%2F%3E%3C%2Fsvg%3E'">
+            <h3>Энергия квазара</h3>
+            <p>Один квазар может излучать в тысячу раз больше света, чем весь Млечный Путь. Источник — аккреционный диск, разогретый до миллионов градусов.</p>
+            <div class="mini-orrery">
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- КНОПКА И АНИМАЦИЯ ВРАЩЕНИЯ ПЛАНЕТ -->
+    <div class="animation-section">
+        <button class="toggle-btn" id="spinPlanetsBtn">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Ob.jpg/320px-The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Ob.jpg" 
+                 alt="солнце" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2240%22%20height%3D%2240%22%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2220%22%20r%3D%2218%22%20fill%3D%22%23f5c542%22%2F%3E%3C%2Fsvg%3E'">
+            ЗАПУСТИТЬ ПЛАНЕТЫ
+        </button>
+
+        <div class="solar-system" id="solarSystem">
+            <div class="orrery" id="orrery">
+                <div class="sun-center"></div>
+                <!-- орбиты (декоративные) -->
+                <div class="orbit orbit1"></div>
+                <div class="orbit orbit2"></div>
+                <div class="orbit orbit3"></div>
+
+                <!-- планеты с картинками через <img> -->
+                <div class="planet merc">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Mercury_in_color_-_Prockter07-edit1.jpg/240px-Mercury_in_color_-_Prockter07-edit1.jpg" 
+                         alt="Меркурий" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2236%22%20height%3D%2236%22%3E%3Ccircle%20cx%3D%2218%22%20cy%3D%2218%22%20r%3D%2216%22%20fill%3D%22%23948c75%22%2F%3E%3C%2Fsvg%3E'">
+                </div>
+                <div class="planet venus">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Venera_13_lander_image_of_Venus.jpg/240px-Venera_13_lander_image_of_Venus.jpg" 
+                         alt="Венера" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2236%22%20height%3D%2236%22%3E%3Ccircle%20cx%3D%2218%22%20cy%3D%2218%22%20r%3D%2216%22%20fill%3D%22%23e68a2e%22%2F%3E%3C%2Fsvg%3E'">
+                </div>
+                <div class="planet earth">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_earth_at_night.jpg/240px-The_earth_at_night.jpg" 
+                         alt="Земля" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2236%22%20height%3D%2236%22%3E%3Ccircle%20cx%3D%2218%22%20cy%3D%2218%22%20r%3D%2216%22%20fill%3D%22%233a75b3%22%2F%3E%3C%2Fsvg%3E'">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="credits">
+        <span>✧ Квазар — сердце тьмы и света ✧</span>
+    </footer>
+</div>
+
+<script>
+    (function() {
+        const btn = document.getElementById('spinPlanetsBtn');
+        const orrery = document.getElementById('orrery');
+        let isSpinning = false;
+
+        btn.addEventListener('click', function() {
+            if (!isSpinning) {
+                orrery.classList.add('spin');
+                btn.innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Ob.jpg/320px-The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Ob.jpg" 
+                 alt="солнце" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2240%22%20height%3D%2240%22%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2220%22%20r%3D%2218%22%20fill%3D%22%23f5c542%22%2F%3E%3C%2Fsvg%3E'">
+                ОСТАНОВИТЬ ВРАЩЕНИЕ`;
+            } else {
+                orrery.classList.remove('spin');
+                btn.innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Ob.jpg/320px-The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Ob.jpg" 
+                 alt="солнце" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2240%22%20height%3D%2240%22%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2220%22%20r%3D%2218%22%20fill%3D%22%23f5c542%22%2F%3E%3C%2Fsvg%3E'">
+                ЗАПУСТИТЬ ПЛАНЕТЫ`;
+            }
+            isSpinning = !isSpinning;
+        });
+    })();
+</script>
+
+<!-- подстраховка изображений: если внешние картинки не загрузятся, будут цветные заглушки -->
+</body>
+</html>
